@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los!Deutsch</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background-color: #f4f5f7;
+        }
+        /* 顶部导航栏 */
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        /* 关于我们模块 */
+        .about {
+            background-color: white;
+            width: 90%;
+            max-width: 850px;
+            margin: 25px auto;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .about h2 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        .about p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #555;
+        }
+        /* 期刊列表标题 */
+        .issue-title {
+            width: 90%;
+            max-width: 850px;
+            margin: 30px auto 20px;
+            font-size: 22px;
+            color: #333;
+        }
+        /* 期刊卡片布局 */
+        .issue-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            width: 90%;
+            max-width: 850px;
+            margin: 0 auto 40px;
+        }
+        .issue-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .issue-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .card-content h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #222;
+        }
+        .card-content p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-read {
+            background-color: #3498db;
+            color: white;
+            margin-right: 8px;
+        }
+        .btn-read:hover {
+            background-color: #2980b9;
+        }
+        .btn-pdf {
+            background-color: #2980b9;
+            color: white;
+        }
+        .btn-pdf:hover {
+            background-color: #2471a3;
+        }
+        /* 文章内容容器（默认隐藏） */
+        .article-container {
+            display: none;
+            width: 90%;
+            max-width: 850px;
+            margin: 0 auto 40px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            line-height: 1.8;
+        }
+        .article-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #2c3e50;
+        }
+        .article-subtitle {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 25px 0 15px;
+            color: #2c3e50;
+        }
+        /* 文章图片样式 */
+        .article-img {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .german-text {
+            font-weight: bold;
+            color: #2980b9;
+        }
+        .list-item {
+            margin: 8px 0 8px 2em;
+        }
+        .tip-box {
+            background-color: #f8f9fa;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-left: 4px solid #f39c12;
+            font-style: italic;
+        }
+        .note-box {
+            background-color: #e8f4f8;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .dialog-box {
+            border: 1px dashed #7f8c8d;
+            padding: 18px;
+            margin: 20px 0;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .emphasis {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .btn-back {
+            background-color: #7f8c8d;
+            color: white;
+            margin-top: 25px;
+        }
+        .btn-back:hover {
+            background-color: #6c7a7d;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="header">
+        <h1>Los!Deutsch</h1>
+        <p>Deutsch Lernen | Kultur | Leben | Übungen</p>
+    </div>
+
+    <!-- 关于我们 -->
+    <div class="about" id="about">
+        <h2>关于我们</h2>
+        <p>本报刊由7人学生团队制作，双周刊更新，内容包含德语语法、词汇、德国文化、学习干货、练习题等，适合大学生自学与复习。</p>
+        <p>所有内容利用课余时间完成，免费开放。</p>
+    </div>
+
+    <!-- 期刊列表 -->
+    <h2 class="issue-title" id="issueTitle">报刊期刊（共8期）</h2>
+    <div class="issue-grid" id="issueGrid">
+        <!-- 第1期 -->
+        <div class="issue-card">
+            <!-- 德语学习封面图 -->
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="第1期封面-德语入门">
+            <div class="card-content">
+                <h3>第1期 | 德语入门与自我介绍</h3>
+                <p>基础句型 + 常用词汇 + 小练习</p>
+                <button class="btn btn-read" onclick="showArticle(1)">阅读本期</button>
+                <button class="btn btn-pdf">下载PDF</button>
+            </div>
+        </div>
+        <!-- 第2期 -->
+        <div class="issue-card">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="第2期封面-德国校园文化">
+            <div class="card-content">
+                <h3>第2期 | 德国校园文化</h3>
+                <p>大学生活 | 学习日常 | 实用表达</p>
+                <button class="btn btn-read" disabled>阅读本期</button>
+                <button class="btn btn-pdf" disabled>下载PDF</button>
+            </div>
+        </div>
+        <!-- 第3期 -->
+        <div class="issue-card">
+            <img src="https://images.unsplash.com/photo-1469474968028-7bef0c89f75d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="第3期封面-德语语法重点">
+            <div class="card-content">
+                <h3>第3期 | 德语语法重点</h3>
+                <p>动词变位 | 格的用法 | 配套习题</p>
+                <button class="btn btn-read" disabled>阅读本期</button>
+                <button class="btn btn-pdf" disabled>下载PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第1期文章内容（默认隐藏） -->
+    <div class="article-container" id="article1">
+        <h1 class="article-title">第1期 | 德语入门与自我介绍</h1>
+
+        <h2 class="article-subtitle">板块一：德语字母与发音</h2>
+        <!-- 德语字母表图片 -->
+        <img src="https://images.unsplash.com/photo-1613682675563-8f4990586299?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="德语字母表" class="article-img">
+        <p>德语字母表共 30个字母，其中包含4个德语特有的变元音字母：<span class="german-text">Aä, Oö, Üü</span> 及特殊字母 <span class="german-text">ß</span>。</p>
+        <p>基础发音规则：</p>
+        <p class="list-item">• 字母发音清晰饱满，如 A [a:], B [be:], C [tse:]</p>
+        <p class="list-item">• 变元音 Ä 发音近似 [ɛ:]，Ö 近似 [œ:]，Ü 近似 [y:]</p>
+        <p class="list-item">• 字母 R 可发小舌音或大舌音，初学者可先弱化处理</p>
+        <div class="tip-box">
+            ✨ 小贴士：德语字母歌《<span class="german-text">Das Abc-Lied</span>》旋律轻快，是记忆字母的好帮手！
+        </div>
+
+        <h2 class="article-subtitle">板块二：核心问候语</h2>
+        <!-- 德语日常问候场景图 -->
+        <img src="https://images.unsplash.com/photo-1596464716052-67188660a5f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="德语日常问候场景" class="article-img">
+        <p>德语问候会根据时间和场合变化，常用表达如下：</p>
+        <p class="list-item">• 早晨：<span class="german-text">Guten Morgen!</span>（早上好！）</p>
+        <p class="list-item">• 白天：<span class="german-text">Guten Tag!</span>（您好！/ 你好！）</p>
+        <p class="list-item">• 傍晚/晚上：<span class="german-text">Guten Abend!</span>（晚上好！）</p>
+        <p class="list-item">• 告别：</p>
+        <p class="list-item" style="margin-left: 4em;">◦ 正式：<span class="german-text">Auf Wiedersehen!</span>（再见！）</p>
+        <p class="list-item" style="margin-left: 4em;">◦ 日常：<span class="german-text">Tschüss!</span>（回见！/ 拜拜！）</p>
+        <div class="note-box">
+            <p>小知识：在不同德语国家，能听到不一样的打招呼方式，例如奥地利常用 <span class="german-text">Servus!</span>，瑞士常用 <span class="german-text">Gruezi!</span>。</p>
+        </div>
+
+        <h2 class="article-subtitle">板块三: 自我介绍核心句型</h2>
+        <!-- 德语自我介绍场景图 -->
+        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="德语自我介绍场景" class="article-img">
+        <p>1. 询问姓名</p>
+        <p class="list-item">• 正式场合：<span class="german-text">Wie heißen Sie?</span>（您叫什么名字？）</p>
+        <p class="list-item">• 日常场合：<span class="german-text">Wie ist Ihr Name?</span>（您的名字是？）</p>
+
+        <p>2. 自我介绍</p>
+        <p class="list-item">• <span class="german-text">Ich heiße [Name].</span>（我叫……）</p>
+        <p class="list-item">• <span class="german-text">Mein Name ist [Name].</span>（我的名字是……）</p>
+        <p class="list-item">• 补充说明：<span class="german-text">[Vorname] ist mein Vorname und [Familienname] ist mein Familienname.</span>（……是我的名，……是我的姓。）</p>
+
+        <p>3. 礼貌回应</p>
+        <p class="list-item">• 没听清时：<span class="german-text">Wie bitte?</span>（您说什么？/ 请再说一遍？）</p>
+        <p class="list-item">• 道歉时：<span class="german-text">Entschuldigung.</span>（抱歉。）</p>
+        <p class="list-item">• 感谢时：<span class="german-text">Danke schön!</span>（非常感谢！）</p>
+
+        <p class="emphasis">敲重点！自我介绍的语法结构，记得牢记于心哦～</p>
+        <div class="note-box">
+            <p>语法小提示：德语自我介绍以陈述句、W疑问句、判断疑问句为主，例：<br>
+            陈述句：<span class="german-text">Ich heiße Yang Fang.</span> / <span class="german-text">Mein Name ist Li Tao.</span><br>
+            W疑问句：<span class="german-text">Wie heißen Sie?</span><br>
+            判断疑问句：<span class="german-text">Heißen Sie Li Tao?</span> / <span class="german-text">Sind Sie Yang Fang?</span></p>
+        </div>
+
+        <h2 class="article-subtitle">板块四：实用对话</h2>
+        <!-- 德语对话练习场景图 -->
+        <img src="https://images.unsplash.com/photo-1590586767744-2e1731879a65?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="德语对话练习场景" class="article-img">
+        <p>下面是一组关于自我介绍的对话，快和你的小伙伴一起试试分角色练习吧！</p>
+        <div class="dialog-box">
+            <p><span class="german-text">Guten Tag, heißen Sie Yang Fang?</span><br>
+            <span class="german-text">Ja, ich bin Yang Fang.</span><br>
+            <span class="german-text">Guten Tag, Frau Fang.</span><br>
+            <span class="german-text">Nein, ich bin nicht Frau Fang, ich bin Frau Yang.</span><br>
+            <span class="german-text">Oh, Entschuldigung.</span></p>
+            <p style="margin-top: 10px;">（译文：您好，您是杨芳吗？/ 是的，我是杨芳。/ 您好，芳女士。/ 不，我不是芳女士，我是杨女士。/ 哦，抱歉。）</p>
+        </div>
+
+        <button class="btn btn-back" onclick="hideArticle(1)">返回期刊列表</button>
+    </div>
+
+    <script>
+        // 显示文章
+        function showArticle(issueNum) {
+            // 隐藏列表和关于我们
+            document.getElementById('about').style.display = 'none';
+            document.getElementById('issueTitle').style.display = 'none';
+            document.getElementById('issueGrid').style.display = 'none';
+            // 显示对应文章
+            document.getElementById('article' + issueNum).style.display = 'block';
+            // 平滑滚动到顶部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 隐藏文章，回到列表
+        function hideArticle(issueNum) {
+            // 显示列表和关于我们
+            document.getElementById('about').style.display = 'block';
+            document.getElementById('issueTitle').style.display = 'block';
+            document.getElementById('issueGrid').style.display = 'grid';
+            // 隐藏文章
+            document.getElementById('article' + issueNum).style.display = 'none';
+            // 平滑滚动到列表
+            document.getElementById('issueGrid').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
